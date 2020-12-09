@@ -17,10 +17,28 @@ android {
             }
         }
     }
+    signingConfigs {
+        debug {
+            storeFile file("/Users/litaofan/.android/debug.keystore")
+        }
+        release {
+            storeFile file("deviceinfo.jks")
+            storePassword "deviceinfo.jks"
+            keyAlias "deviceinfo.jks"
+            keyPassword "deviceinfo.jks"
+        }
+    }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            signingConfig signingConfigs.release
+            zipAlignEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            // applicationIdSuffix ".debug"
         }
     }
     externalNativeBuild {
